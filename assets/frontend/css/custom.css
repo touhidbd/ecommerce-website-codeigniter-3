@@ -1,0 +1,7 @@
+.cart-number {
+    min-width: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+}
