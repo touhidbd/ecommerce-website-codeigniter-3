@@ -39,7 +39,7 @@
                                         <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>ID</th>
+                                                    <th>SL</th>
                                                     <th>Name</th>
                                                     <th>Image</th>
                                                     <th>Slug</th>
@@ -48,9 +48,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($categories as $category): ?>
+                                                <?php $counter = 1; foreach($categories as $category): ?>
                                                 <tr>
-                                                    <td><?= $category->id; ?></td>
+                                                    <td><?= $counter; ?></td>
                                                     <td><?= $category->title; ?></td>
                                                     <td><img width="50" src="<?= base_url('assets/uploads/category/').$category->image; ?>" alt=""></td>
                                                     <td><?= $category->slug; ?></td>
@@ -60,7 +60,7 @@
                                                         <a href="#" class="btn btn-sm btn-danger">Delete</a>
                                                     </td>
                                                 </tr>
-                                                <?php endforeach; ?>
+                                                <?php $counter++; endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>

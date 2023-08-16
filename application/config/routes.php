@@ -71,4 +71,5 @@ $route['admin/categories']['GET'] = 'backend/CategoryController/index';
 $route['admin/add-category']['GET'] = 'backend/CategoryController/insert';
 $route['admin/add-category']['POST'] = 'backend/CategoryController/create';
 $route['admin/edit-category/(:num)']['GET'] = 'backend/CategoryController/edit/$1';
+$route['admin/edit-category/(:num)']['POST'] = 'backend/CategoryController/update/$1';
 
