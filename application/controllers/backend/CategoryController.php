@@ -187,4 +187,23 @@ class CategoryController extends CI_Controller
             redirect('admin/edit-category/'.$id);
         }
     }
+
+    public function delete($id)
+    {
+        $category = new CategoryModel;
+        if($category->checkProduct($id))
+        {
+            $data = $category->checkProduct($id);
+
+            if(file_exists('./assets/uploads/category/'.$data->image)) {
+                unlink('./assets/uploads/category/'.$data->image);
+            }
+
+            $category->deleteProduct($id);
+
+            $this->session->set_flashdata('status', 'Category deleted successfully!');
+            $this->session->set_flashdata('alert', 'success');
+            redirect('admin/categories');
+        }
+    }
 }

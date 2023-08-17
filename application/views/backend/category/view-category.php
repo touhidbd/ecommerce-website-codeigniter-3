@@ -57,19 +57,36 @@
                                                     <td><?= $category->status == 0 ? 'Hidden': 'Published'; ?></td>
                                                     <td>
                                                         <a href="<?= base_url('admin/edit-category/').$category->id; ?>" class="btn btn-sm btn-success">Edit</a>
-                                                        <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                                        <button data-toggle="modal" data-target="#deleteCategory" data-id="<?= $category->id; ?>" class="btn delete-category btn-sm btn-danger">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <?php $counter++; endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- Delete Modal-->
+                                    <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Ready to delete?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Are you sure to delete this category?</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <a id="btn-delete" class="btn btn-danger" href="<?= base_url('admin/delete-category/').$category->id; ?>">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <?php endif; ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                        
+                    </div>                        
 
                 </div>
                 <!-- /.container-fluid -->
@@ -81,5 +98,12 @@
     </div>
     <!-- End of Page Wrapper -->
     <?php $this->load->view('backend/layouts/foot'); ?>
+    
+    <script>
+        $('.delete-category').click(function(){
+            var dataId = $(this).data("id");
+            $('#btn-delete').attr("href", "<?= base_url('admin/delete-category/'); ?>"+dataId);
+        });
+    </script>
 </body>
 </html>
