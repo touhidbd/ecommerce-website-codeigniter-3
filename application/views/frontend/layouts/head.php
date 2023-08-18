@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Hexashop Ecommerce HTML CSS Template</title>
+    <title><?php if(isset($head['title'])) { echo $head['title']; } else { echo "Home | CodeIgniter 3 Ecommerce"; }?></title>
 
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/frontend/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url(); ?>assets/frontend/css/font-awesome.css">

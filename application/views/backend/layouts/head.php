@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title><?php if(isset($head['title'])) { echo $head['title']; } else { echo "Ecommerce - Dashboard"; }?></title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= base_url('assets/backend'); ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

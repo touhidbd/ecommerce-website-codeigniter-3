@@ -11,6 +11,9 @@ class PageController extends CI_Controller
     
     public function index()
     {
-        $this->load->view('frontend/user');
+        $data['head'] = [
+            'title' => 'User details | CodeIgniter 3 Ecommerce'
+        ];
+        $this->load->view('frontend/user', $data);
     }
 }

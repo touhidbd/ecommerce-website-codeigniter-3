@@ -12,6 +12,9 @@ class DashboardController extends CI_Controller
 
     public function index()
     {
-        $this->load->view('backend/dashboard');
+        $data['head'] = [
+            'title' => 'Dashboard | CodeIgniter 3 Ecommerce Website'
+        ];
+        $this->load->view('backend/dashboard', $data);
     }
 }

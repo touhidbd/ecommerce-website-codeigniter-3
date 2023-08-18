@@ -17,6 +17,10 @@ class CategoryController extends CI_Controller
 
     public function index()
     {
+        $data['head'] = [
+            'title' => 'Categories | CodeIgniter 3 Ecommerce Website'
+        ];
+
         $categories = new CategoryModel;
         $data['categories'] = $categories->get_categories();
         $this->load->view('backend/category/view-category', $data);
@@ -24,7 +28,10 @@ class CategoryController extends CI_Controller
 
     public function insert()
     {
-        $this->load->view('backend/category/add-category');
+        $data['head'] = [
+            'title' => 'Add Category | CodeIgniter 3 Ecommerce Website'
+        ];
+        $this->load->view('backend/category/add-category', $data);
     }
 
     public function check_unique_slug($slug) {
@@ -104,6 +111,9 @@ class CategoryController extends CI_Controller
 
     public function edit($id)
     {
+        $data['head'] = [
+            'title' => 'Edit Category | CodeIgniter 3 Ecommerce Website'
+        ];
         $category = new CategoryModel;
         $data['category'] = $category->get_category($id);
         $this->load->view('backend/category/edit-category', $data);
