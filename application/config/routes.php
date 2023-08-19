@@ -74,3 +74,10 @@ $route['admin/edit-category/(:num)']['GET'] = 'backend/CategoryController/edit/$
 $route['admin/edit-category/(:num)']['POST'] = 'backend/CategoryController/update/$1';
 $route['admin/delete-category/(:num)']['GET'] = 'backend/CategoryController/delete/$1';
 
+//ParagonIE_Sodium_Core_SecretStream_State
+$route['admin/products']['GET'] = 'backend/ProductController/index';
+$route['admin/add-product']['GET'] = 'backend/ProductController/insert';
+$route['admin/add-product']['POST'] = 'backend/ProductController/create';
+$route['admin/edit-product/(:num)']['GET'] = 'backend/ProductController/edit/$1';
+$route['admin/edit-product/(:num)']['POST'] = 'backend/ProductController/update/$1';
+$route['admin/delete-product/(:num)']['GET'] = 'backend/ProductController/delete/$1';

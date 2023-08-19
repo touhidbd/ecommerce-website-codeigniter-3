@@ -16,8 +16,8 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Category List</h1>
-                        <a href="<?= base_url('admin/add-category'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Category</a>
+                        <h1 class="h3 mb-0 text-gray-800">Product List</h1>
+                        <a href="<?= base_url('admin/add-product'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Add Product</a>
                     </div>
 
                     <?php if(isset($_SESSION['status'])): ?>
@@ -31,10 +31,10 @@
                         <div class="col-md-12">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">All Categories</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">All Products</h6>
                                 </div>
                                 <div class="card-body">
-                                    <?php if($categories): ?>
+                                    <?php if($products): ?>
                                     <div class="table-responsive">
                                         <table class="table table-bordered align-middle" id="dataTable" width="100%" cellspacing="0">
                                             <thead>
@@ -43,21 +43,25 @@
                                                     <th>Name</th>
                                                     <th>Image</th>
                                                     <th>Slug</th>
+                                                    <th>Category</th>
+                                                    <th>Trending</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $counter = 1; foreach($categories as $category): ?>
+                                                <?php $counter = 1; foreach($products as $product): ?>
                                                 <tr>
                                                     <td><?= $counter; ?></td>
-                                                    <td><?= $category->category_name; ?></td>
-                                                    <td><img width="50" src="<?= base_url('assets/uploads/category/').$category->category_image; ?>" alt=""></td>
-                                                    <td><?= $category->category_slug; ?></td>
-                                                    <td><?= $category->category_status == 0 ? 'Hidden': 'Published'; ?></td>
+                                                    <td><?= $product->title; ?></td>
+                                                    <td><img width="50" src="<?= base_url('assets/uploads/products/').$product->image; ?>" alt=""></td>
+                                                    <td><?= $product->slug; ?></td>
+                                                    <td><?= $product->category_name; ?></td>
+                                                    <td><?= $product->trending == 0 ? 'No': 'Yes'; ?></td>
+                                                    <td><?= $product->status == 0 ? 'Hidden': 'Published'; ?></td>
                                                     <td>
-                                                        <a href="<?= base_url('admin/edit-category/').$category->category_id; ?>" class="btn btn-sm btn-success">Edit</a>
-                                                        <button data-toggle="modal" data-target="#deleteCategory" data-id="<?= $category->category_id; ?>" class="btn delete-category btn-sm btn-danger">Delete</button>
+                                                        <a href="<?= base_url('admin/edit-product/').$product->id; ?>" class="btn btn-sm btn-success">Edit</a>
+                                                        <button data-toggle="modal" data-target="#deleteProduct" data-id="<?= $product->id; ?>" class="btn delete-product btn-sm btn-danger">Delete</button>
                                                     </td>
                                                 </tr>
                                                 <?php $counter++; endforeach; ?>
@@ -65,7 +69,7 @@
                                         </table>
                                     </div>
                                     <!-- Delete Modal-->
-                                    <div class="modal fade" id="deleteCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+                                    <div class="modal fade" id="deleteProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -74,16 +78,16 @@
                                                         <span aria-hidden="true">×</span>
                                                     </button>
                                                 </div>
-                                                <div class="modal-body">Are you sure to delete this category?</div>
+                                                <div class="modal-body">Are you sure to delete this product?</div>
                                                 <div class="modal-footer">
                                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <a id="btn-delete" class="btn btn-danger" href="<?= base_url('admin/delete-category/').$category->category_id; ?>">Delete</a>
+                                                    <a id="btn-delete" class="btn btn-danger" href="<?= base_url('admin/delete-product/').$product->id; ?>">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <?php else: ?>
-                                        <h6 class="text-center">No category found!</h6>
+                                        <h6 class="text-center">No products found!</h6>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -102,9 +106,9 @@
     <?php $this->load->view('backend/layouts/foot'); ?>
     
     <script>
-        $('.delete-category').click(function(){
+        $('.delete-product').click(function(){
             var dataId = $(this).data("id");
-            $('#btn-delete').attr("href", "<?= base_url('admin/delete-category/'); ?>"+dataId);
+            $('#btn-delete').attr("href", "<?= base_url('admin/delete-product/'); ?>"+dataId);
         });
     </script>
 </body>

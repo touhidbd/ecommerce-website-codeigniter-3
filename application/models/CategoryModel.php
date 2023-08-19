@@ -22,7 +22,7 @@ class CategoryModel extends CI_Model
         // $this->db->limit(1);
         
         
-        $query = $this->db->get_where('categories', ['id' => $id]);
+        $query = $this->db->get_where('categories', ['category_id' => $id]);
         if($query->num_rows() == 1) 
         {
             return $query->row();
@@ -35,17 +35,17 @@ class CategoryModel extends CI_Model
 
     public function updateCategory($data, $id)
     {
-        return $this->db->update('categories', $data, ['id' => $id]);
+        return $this->db->update('categories', $data, ['category_id' => $id]);
     }
 
-    public function checkProduct($id)
+    public function checkCategory($id)
     {
-        $query = $this->db->get_where('categories', ['id' => $id]);
+        $query = $this->db->get_where('categories', ['category_id' => $id]);
         return $query->row();
     }
 
-    public function deleteProduct($id)
+    public function deleteCategory($id)
     {
-        return $this->db->delete('categories', ['id' => $id]);
+        return $this->db->delete('categories', ['category_id' => $id]);
     }
 }

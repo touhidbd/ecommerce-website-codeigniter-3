@@ -35,8 +35,9 @@ class CategoryController extends CI_Controller
     }
 
     public function check_unique_slug($slug) {
-        $this->load->model('SlugModel');
-        $result = $this->SlugModel->check_slug_exists($slug);
+        $this->load->model('CategorySlugModel');
+        $table = 'categories';
+        $result = $this->CategorySlugModel->check_slug_exists($slug, $table);
     
         return $result;
     }
@@ -82,15 +83,15 @@ class CategoryController extends CI_Controller
                 }
 
                 $data = [
-                    'title' => $title,
-                    'sub_title' => $this->input->post('sub_title'),
-                    'slug' => $slug,
-                    'description' => $this->input->post('description'),
-                    'image' => $filename,
-                    'meta_title' => $this->input->post('meta_title'),
-                    'meta_description' => $this->input->post('meta_description'),
-                    'meta_keywords' => $this->input->post('meta_keywords'),
-                    'status' => $status
+                    'category_name' => $title,
+                    'category_sub_title' => $this->input->post('sub_title'),
+                    'category_slug' => $slug,
+                    'category_description' => $this->input->post('description'),
+                    'category_image' => $filename,
+                    'category_meta_title' => $this->input->post('meta_title'),
+                    'category_meta_description' => $this->input->post('meta_description'),
+                    'category_meta_keywords' => $this->input->post('meta_keywords'),
+                    'category_status' => $status
                 ];
                 $category = new CategoryModel;
                 $res = $category->insertCategory($data);
@@ -173,15 +174,15 @@ class CategoryController extends CI_Controller
             }
 
             $data = [
-                'title' => $this->input->post('title'),
-                'sub_title' => $this->input->post('sub_title'),
-                'slug' => $slug,
-                'description' => $this->input->post('description'),
-                'image' => $update_filename,
-                'meta_title' => $this->input->post('meta_title'),
-                'meta_description' => $this->input->post('meta_description'),
-                'meta_keywords' => $this->input->post('meta_keywords'),
-                'status' => $status
+                'category_name' => $this->input->post('title'),
+                'category_sub_title' => $this->input->post('sub_title'),
+                'category_slug' => $slug,
+                'category_description' => $this->input->post('description'),
+                'category_image' => $update_filename,
+                'category_meta_title' => $this->input->post('meta_title'),
+                'category_meta_description' => $this->input->post('meta_description'),
+                'category_meta_keywords' => $this->input->post('meta_keywords'),
+                'category_status' => $status
             ];
             $category = new CategoryModel;
             $res = $category->updateCategory($data, $id);
@@ -201,15 +202,15 @@ class CategoryController extends CI_Controller
     public function delete($id)
     {
         $category = new CategoryModel;
-        if($category->checkProduct($id))
+        if($category->checkCategory($id))
         {
-            $data = $category->checkProduct($id);
+            $data = $category->checkCategory($id);
 
-            if(file_exists('./assets/uploads/category/'.$data->image)) {
-                unlink('./assets/uploads/category/'.$data->image);
+            if(file_exists('./assets/uploads/category/'.$data->category_image)) {
+                unlink('./assets/uploads/category/'.$data->category_image);
             }
 
-            $category->deleteProduct($id);
+            $category->deleteCategory($id);
 
             $this->session->set_flashdata('status', 'Category deleted successfully!');
             $this->session->set_flashdata('alert', 'success');
